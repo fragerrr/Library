@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="people-list">
+  <table class="table mt-2">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Age</th>
+      <th>Books</th>
+      <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="person : ${personList}">
+      <tr>
+        <td th:text="${person.getId()}"></td>
+        <td th:text="${person.getName()}"></td>
+        <td th:text="${person.getUser().getEmail()}"></td>
+        <td th:text="${person.getAge()}"></td>
+
+        <td><a th:href="@{'/admin/' + ${person.getId()} + '/books'}">BOOKS</a></td>
+
+        <td><a th:href="@{'/admin/' + ${person.getId()} + '/delete'}" class="btn btn-danger">DELETE</a></td>
+      </tr>
+    </th:block>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

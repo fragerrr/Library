@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+    <div th:fragment="book-list">
+      <table class="table mt-2">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th th:if="${owner}">Free</th>
+            <th th:if="${taker}">Take</th>
+          </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="book : ${bookList}">
+          <tr>
+            <td th:text="${book.getId()}"></td>
+            <td th:text="${book.getName()}"></td>
+            <td th:text="${book.getAuthor()}"></td>
+            <td th:text="${book.getYear()}"></td>
+            <td th:if="${owner}"><a th:href="@{'/book/' + ${book.getId()} + '/free'}" class="btn btn-danger">FREE</a></td>
+            <td th:if="${taker}"><a th:href="@{'/book/' + ${book.getId()} + '/take'}" class="btn btn-info">TAKE</a></td>
+          </tr>
+        </th:block>
+        </tbody>
+      </table>
+    </div>
+
+</body>
+</html>
